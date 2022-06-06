@@ -32,10 +32,33 @@ function displayBooksOnPage() {
   }
 
   // Loop over the library
-  myLibrary.forEach((myLibrary) => {
+  let index = 0;
+  myLibrary.forEach((myLibrarys) => {
     const card = document.createElement("div");
     card.classList.add("card");
     books.appendChild(card);
+
+    // Create remove book button and add class attribute for each array card
+    const removeBookButton = document.createElement("button");
+    removeBookButton.classList.add("remove-book-button");
+    removeBookButton.textContent = "Remove From Library";
+
+    // Link the data attribute of the remove button to the array and card
+    removeBookButton.dataset.linkedArray = index;
+    index++;
+    card.appendChild(removeBookButton);
+
+    // Start event listener//remove arry item from card and parent div via data link
+    removeBookButton.addEventListener("click", removeBookFromLibrary);
+
+    function removeBookFromLibrary() {
+      let retrieveBookToRemove = removeBookButton.dataset.linkedArray;
+      myLibrary.splice(parseInt(retrieveBookToRemove), 1);
+      card.remove();
+      displayBooksOnPage();
+    }
+
+    // Loop over the object keys and values and display to each card
     for (let key in myLibrary) {
       const para = document.createElement("p");
       para.textContent = `${key}: ${myLibrary[key]}`;
