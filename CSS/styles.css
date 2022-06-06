@@ -1,3 +1,29 @@
+body {
+  background-color: deepskyblue;
+}
+
+button {
+  font-size: 15px;
+  font-family: Arial;
+  width: 140px;
+  height: 50px;
+  border-width: 1px;
+  color: #fff;
+  border-color: #599bb3;
+  font-weight: bold;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0px 10px 14px -7px #276873;
+  text-shadow: 0px 1px 0px #3d768a;
+  background: linear-gradient(#599bb3, #408c99);
+}
+
+button:hover {
+  background: linear-gradient(#408c99, #599bb3);
+}
+
 .container {
   border-style: groove;
   display: grid;
@@ -26,12 +52,21 @@
 }
 
 .books .card {
-  background-color: white;
-  color: black;
+  background-color: #3d768a;
+  color: white;
   height: 400px;
   display: grid;
 }
 
 .form {
   border-style: groove;
+}
+
+#add-book {
+  display: grid;
+  grid-template-columns: 0.1fr 1fr;
+  gap: 10px;
+  margin: 50px;
+  align-items: center;
+  justify-content: center;
 }
