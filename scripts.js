@@ -2,23 +2,19 @@
 let myLibrary = [];
 
 // Object Constructor
-function book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-
-  //   info: function () {
-  //     console.log(
-  //       this.title + ", " + this.author + ", " + this.pages + ", " + this.read
-  //     );
-  //   },
+class Book {
+  constructor(Title, Author, Pages, Read) {
+    this.Title = Title;
+    this.Author = Author;
+    this.Pages = Pages;
+    this.Read = Read;
+  }
 }
 
 // Add to myLibrary
-function addBookToLibrary(title, author, pages, read) {
-  let Book = new book(title, author, pages, read);
-  myLibrary.push(Book);
+function addBookToLibrary(Title, Author, Pages, Read) {
+  let book = new Book(Title, Author, Pages, Read);
+  myLibrary.push(book);
   displayBooksOnPage();
 }
 
@@ -45,7 +41,6 @@ function displayBooksOnPage() {
 
     // Link the data attribute of the remove button to the array and card
     removeBookButton.dataset.linkedArray = index;
-    index++;
     card.appendChild(removeBookButton);
 
     // Start event listener//remove arry item from card and parent div via data link
@@ -58,12 +53,36 @@ function displayBooksOnPage() {
       displayBooksOnPage();
     }
 
-    // Loop over the object keys and values and display to each card
-    for (let key in myLibrary) {
+    const readStatusButton = document.createElement("button");
+    readStatusButton.classList.add("read-status-button");
+    readStatusButton.textContent = "Toggle Read Status";
+
+    readStatusButton.dataset.linkedArray = index;
+    card.appendChild(readStatusButton);
+    readStatusButton.addEventListener("click", toggleReadStatus);
+
+    function toggleReadStatus() {
+      let retrieveBookToToggle = readStatusButton.dataset.linkedArray;
+      Book.prototype = Object.create(Book.prototype);
+      const toggleBook = new Book();
+
+      if (myLibrary[parseInt(retrieveBookToToggle)].Read == "Yes") {
+        toggleBook.Read = "No";
+        myLibrary[parseInt(retrieveBookToToggle)].Read = toggleBook.Read;
+      } else if (myLibrary[parseInt(retrieveBookToToggle)].Read == "No") {
+        toggleBook.Read = "Yes";
+        myLibrary[parseInt(retrieveBookToToggle)].Read = toggleBook.Read;
+      }
+      displayBooksOnPage();
+    }
+
+    for (let key in myLibrarys) {
       const para = document.createElement("p");
-      para.textContent = `${key}: ${myLibrary[key]}`;
+      para.textContent = `${key}: ${myLibrarys[key]}`;
       card.appendChild(para);
     }
+
+    index++;
   });
 }
 
@@ -78,16 +97,16 @@ const submitButton = document.querySelector(".submit-button");
 submitButton.addEventListener("click", intakeFormData);
 
 function intakeFormData() {
-  let title = document.getElementById("title").value;
-  let author = document.getElementById("author").value;
-  let pages = document.getElementById("pages").value;
-  let read = document.getElementById("read").value;
+  let Title = document.getElementById("Title").value;
+  let Author = document.getElementById("Author").value;
+  let Pages = document.getElementById("Pages").value;
+  let Read = document.getElementById("Read").value;
 
-  if (title == "" || author == "" || pages == "" || read == "") {
+  if (Title == "" || Author == "" || Pages == "" || Read == "") {
     return;
   }
 
-  addBookToLibrary(title, author, pages, read);
+  addBookToLibrary(Title, Author, Pages, Read);
 
   document.getElementById("add-book").reset();
 }
@@ -98,11 +117,3 @@ clearButton.addEventListener("click", clearForm);
 function clearForm() {
   document.getElementById("add-book").reset();
 }
-
-// addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "295 pages", "Not Read Yet");
-// addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "295 pages", "Not Read Yet");
-// addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "295 pages", "Not Read Yet");
-// addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "295 pages", "Not Read Yet");
-// addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "295 pages", "Not Read Yet");
-// addBookToLibrary("The Hobbit", "J.R.R. Tolkien", "295 pages", "Not Read Yet");
-// displayBooksOnPage();
