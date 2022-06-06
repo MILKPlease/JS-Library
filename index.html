@@ -17,7 +17,21 @@
         <h1>Current Books in Library</h1>
       </div>
       <div class="form">
-        <p>Test Form Info</p>
+        <button class="add-book-button">Add New Book</button>
+        <div id="add-book-form" style="display: none">
+          <form id="add-book">
+            <label for="Title">Title:</label>
+            <input type="text" id="Title" name="Title" />
+            <label for="Author">Author:</label>
+            <input type="text" id="Author" name="Author" />
+            <label for="Pages">Page:</label>
+            <input type="text" id="Pages" name="Pages" />
+            <label for="Read">Read:</label>
+            <input type="text" id="Read" name="Read" />
+          </form>
+          <button type="submit" class="submit-button">Add to Library</button>
+          <button type="reset" class="reset-button">Reset Form</button>
+        </div>
       </div>
       <div class="books"></div>
     </div>
